@@ -5,7 +5,7 @@
 Сценарий выполнения задачи:
 - Установите docker и docker compose plugin на свою linux рабочую станцию или ВМ.
 - Если dockerhub недоступен создайте файл /etc/docker/daemon.json с содержимым: ```{"registry-mirrors": ["https://mirror.gcr.io", "https://daocloud.io", "https://c.163.com/", "https://registry.docker-cn.com"]}```
-- Зарегистрируйтесь и создайте публичный репозиторий  с именем "1" на https://hub.docker.com (ТОЛЬКО ЕСЛИ У ВАС ЕСТЬ ДОСТУП);
+- Зарегистрируйтесь и создайте публичный репозиторий с именем "custom-nginx" на https://hub.docker.com (ТОЛЬКО ЕСЛИ У ВАС ЕСТЬ ДОСТУП);
 - скачайте образ nginx:1.21.1;
 - Создайте Dockerfile и реализуйте в нем замену дефолтной индекс-страницы(/usr/share/nginx/html/index.html), на файл index.html с содержимым:
 ```
@@ -68,6 +68,33 @@ https://hub.docker.com/repository/docker/mrvang0gh/custom-nginx/general
 12. Удалите запущенный контейнер "custom-nginx-t2", не останавливая его.(воспользуйтесь --help или google)
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
+
+## Решение 3
+
+Когда мы подключились к контейнеру при помощи команды `docker attach`, комбинация клавиш `Ctrl+C` пошлет сигнал на завершение текущего процесса (а по сути мы подключились к командной строке bash), то есть bash в нашем случае будет родительским процессом. Без него будут завершены все дочерние (как это видно на скриншоте).
+![Screen_3_1](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_3_1.png)
+
+Произвожу перезапуск контейнера:
+![Screen_3_2](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_3_2.png)
+
+Интерактивный режим контейнера с оболочкой bash:
+![Screen_3_3](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_3_3.png)
+
+Пытаясь поставить пакет с текстовым редактором, обнаружил проблему невозможности обращения к репозиториям через apt. Для решения создал новый docker image на базе `nginx:stable`. Теперь новый контейнер называется `custom-nginx-t2-v2`.
+Теперь можно спокойно установить пакеты в контейнере:
+![Screen_3_4](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_3_4.png)
+
+Отредактировал файл с настройками nginx в контейнере. Теперь служба слушает 81 порт
+![Screen_3_5](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_3_5.png)
+
+После того как был изменен порт в настройках nginx в контейнере, мы не можем попасть на web-сервер используя 80 порт (или проброс 8080-80)
+![Screen_3_6](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_3_6.png)
+
+Удаление запущенного контейнера:
+![Screen_3_7](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_3_7.png)
+
+
+---
 
 ## Задача 4
 
