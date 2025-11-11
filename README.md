@@ -26,6 +26,8 @@ Hey, Netology
 Измененный docker image доступен в моем репозитории по ссылке:
 https://hub.docker.com/repository/docker/mrvang0gh/custom-nginx/general
 
+---
+
 ## Задача 2
 1. Запустите ваш образ custom-nginx:1.0.0 командой docker run в соответвии с требованиями:
 - имя контейнера "ФИО-custom-nginx-t2"
@@ -37,6 +39,19 @@ https://hub.docker.com/repository/docker/mrvang0gh/custom-nginx/general
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
+## Решение 2
+
+Привожу ниже скриншоты консоли с командами и их выводом:
+
+![Screen_2_1](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_2_1.png)
+
+![Screen_2_2](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_2_2.png)
+
+![Screen_2_3](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_2_3.png)
+
+![Screen_2_4](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_2_4.png)
+
+---
 
 ## Задача 3
 1. Воспользуйтесь docker help или google, чтобы узнать как подключиться к стандартному потоку ввода/вывода/ошибок контейнера "custom-nginx-t2".
