@@ -80,7 +80,7 @@ https://hub.docker.com/repository/docker/mrvang0gh/custom-nginx/general
 Интерактивный режим контейнера с оболочкой bash:
 ![Screen_3_3](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_3_3.png)
 
-Пытаясь поставить пакет с текстовым редактором, обнаружил проблему невозможности обращения к репозиториям через apt. Для решения создал новый docker image на базе `nginx:stable`. Теперь новый контейнер называется `custom-nginx-t2-v2`.
+Пытаясь поставить пакет с текстовым редактором, обнаружил проблему невозможности обращения к репозиториям через apt. Для решения создал новый docker image на базе `nginx:stable`. Новый контейнер называется `custom-nginx-t2-v2`.
 Теперь можно спокойно установить пакеты в контейнере:
 ![Screen_3_4](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_3_4.png)
 
