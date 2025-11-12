@@ -163,4 +163,54 @@ services:
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод, файл compose.yaml , скриншот portainer c задеплоенным компоузом.
 
+## Решение 5
+
+Создал директорию с необходимыми файлами compose.yaml и docker-compose.yaml:
+
+![Screen_5_1](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_5_1.png)
+
+Чтобы подхватывались оба .yaml файла, я внес изменения в файл `compose.yaml`:
+
+```                                                                                                                                                  
+# version: "3"
+include:
+  - docker-compose.yaml
+services:
+  portainer:
+    network_mode: host
+    image: portainer/portainer-ce:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+```
+![Screen_5_2](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_5_2.png)
+
+ Теперь видно, что запущены два контейнера: portainer и registry
+
+![Screen_5_3](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_5_3.png)
+
+Необходимый образ был переименован и загружен в локальный registry:
+
+![Screen_5_4](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_5_4.png)
+
+Вкладка stacks в развернутом portainer:
+
+![Screen_5_5](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_5_5.png)
+
+После того, как задеплоили компоуз через web editor:
+
+![Screen_5_6](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_5_6.png)
+
+![Screen_5_7](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_5_7.png)
+![Screen_5_8](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_5_8.png)
+
+Удаление одного из манифестов приводит к предупреждению в момент запуска `docker compose up -d`
+![Screen_5_9](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_5_9.png)
+Суть предупреждения сводится к тому, что система обнаружила "осиротевшие" контейнеры для проекта. Чтобы убрать предупреждение, можно запустить компоуз с флагом `--remove-orphans`
+
+![Screen_5_10](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_5_10.png)
+
+Чтобы погасить проект используем команду `docker compose down`
+![Screen_5_11](https://github.com/MrVanG0gh/05-virt-03-docker-intro/blob/main/Screenshots/Screenshot_5_11.png)
+
 ---
